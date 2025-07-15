@@ -68,6 +68,22 @@ cargo run --bin cratedocs test --tool lookup_crate --crate-name tokio --output t
 
 By default, the HTTP server will listen on `http://127.0.0.1:8080/sse`.
 
+## Configuration
+
+### Log Directory
+
+You can configure where log files are stored by setting the `CRATEDOCS_LOG_DIR` environment variable:
+
+```bash
+# Use a custom log directory
+CRATEDOCS_LOG_DIR=/var/log/cratedocs cargo run --bin cratedocs stdio
+
+# Use a temporary directory
+CRATEDOCS_LOG_DIR=/tmp/cratedocs-logs cargo run --bin cratedocs stdio
+```
+
+If not set, logs will be stored in the default `logs/` directory in the current working directory.
+
 ## Available Tools
 
 The server provides the following tools:

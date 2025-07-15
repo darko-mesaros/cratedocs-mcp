@@ -77,6 +77,20 @@ enum Commands {
     },
 }
 
+/// Get the log directory from environment variable or default
+fn get_log_directory() -> String {
+    let log_dir = std::env::var("CRATEDOCS_LOG_DIR")
+        .unwrap_or_else(|_| "logs".to_string())
+        .trim()
+        .to_string();
+    
+    if log_dir.is_empty() {
+        "logs".to_string()
+    } else {
+        log_dir
+    }
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     let cli = Cli::parse();
@@ -110,7 +124,8 @@ async fn main() -> Result<()> {
 
 async fn run_stdio_server(debug: bool) -> Result<()> {
     // Set up file appender for logging
-    let file_appender = RollingFileAppender::new(Rotation::DAILY, "logs", "stdio-server.log");
+    let log_dir = get_log_directory();
+    let file_appender = RollingFileAppender::new(Rotation::DAILY, log_dir, "stdio-server.log");
 
     // Initialize the tracing subscriber with file logging
     let level = if debug { tracing::Level::DEBUG } else { tracing::Level::INFO };
