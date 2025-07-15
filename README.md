@@ -79,6 +79,25 @@ You can configure where log files are stored by setting the `CRATEDOCS_LOG_DIR` 
 CRATEDOCS_LOG_DIR=/var/log/cratedocs cargo run --bin cratedocs stdio
 ```
 
+Or if you are setting it up in `mcp.json`, you can use the following standarf format (pending your client supports it):
+```json
+{
+    "mcpServers": {
+        "cratedocs": {
+            "command": "cratedocs",
+            "args" : [
+                "stdio"
+            ],
+            "env": {
+                "CRATEDOCS_LOG_DIR": "/tmp/cratedocs_logs"
+            },
+            "disabled": false
+        }
+    }
+}
+```
+*Note: The above example requires you to have the bin `cratedocs` installed and available in your `$PATH`*
+
 If not set, logs will be stored in the default `logs/` directory in the current working directory.
 
 ## Available Tools
