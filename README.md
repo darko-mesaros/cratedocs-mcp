@@ -77,9 +77,6 @@ You can configure where log files are stored by setting the `CRATEDOCS_LOG_DIR` 
 ```bash
 # Use a custom log directory
 CRATEDOCS_LOG_DIR=/var/log/cratedocs cargo run --bin cratedocs stdio
-
-# Use a temporary directory
-CRATEDOCS_LOG_DIR=/tmp/cratedocs-logs cargo run --bin cratedocs stdio
 ```
 
 If not set, logs will be stored in the default `logs/` directory in the current working directory.
